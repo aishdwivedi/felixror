@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
     def index
+        @post = Post.all
     end
     
     def new
@@ -9,10 +10,11 @@ class PostsController < ApplicationController
      def create
           @post = Post.new(params[:post_params])
           @post.save
-          redirect_to show_path
-    end
+          redirect_to show_path(@post[:id])
+     end
     
     def show
+        @post = Post.find(params[:id])
     end
     private
     
